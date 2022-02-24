@@ -1,19 +1,18 @@
 package com.bridgelabz.medicalshop;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+import java.util.Scanner;
 
 import com.bridgelabz.medicalshop.Medicine.MedicineType;
 
 public class Main {
 	Scanner scn = new Scanner(System.in);
-	MedicalStore medicalStore = new MedicalStore();
+	MedicalStore medicalStore = MedicalStore.getInstance();
 	
 	public void handleUserSelection(int choice) {
 		
-		UserInterface userInterface = new UserInterface();
+		UserInterface userInterface = UserInterface.getInstance();
 		
 		switch(choice) {
 		case 1:
@@ -45,7 +44,7 @@ public class Main {
 	}
 	
 	private MedicineType setMedicineType() {
-		UserInterface userInterface = new UserInterface();
+		UserInterface userInterface = UserInterface.getInstance();
 		int medicineTypeChoice = userInterface.showMedicineTypeUpdateMenu();
 		Medicine medicine = new Medicine();
 		switch(medicineTypeChoice) {
@@ -59,12 +58,11 @@ public class Main {
 			medicine.type = MedicineType.HOMEOPATHIC;
 			break;
 		}
-		
 		return medicine.type;
 	}
 	
 	private void updateMedicine() {
-		UserInterface userInterface = new UserInterface();
+		UserInterface userInterface = UserInterface.getInstance();
 		String medicineName = userInterface.selectMedicine();
 		
 		Medicine medicineForUpdate = medicalStore.getMedicine(medicineName);
@@ -98,50 +96,25 @@ public class Main {
 
 	public void addMedicine() {
 		
-//		MedicalStore medicalStore = new MedicalStore();
-				
-		Vicks vicks = new Vicks();		
-		vicks.price = 3; 
-		Azithromycin azithromycin = new Azithromycin();
-		azithromycin.price = 4.5;
-		BTrim btrim = new BTrim();
-		btrim.price = 5.8;
-		Paracetmol paracetmol = new Paracetmol();
-		paracetmol.price = 5.2;
-		Chawanprash chawanprash = new Chawanprash();
-		chawanprash.price = 4;
+		Medicine medicine = new Medicine();
+		System.out.println("Enter Medicine Name");
+		medicine.name = scn.next();
+		System.out.println("Enter Medicine Brand name");
+		medicine.brandName = scn.next();
+		System.out.println("Enter Medicine Type");
+		medicine.type = setMedicineType();
+		System.out.println("Enter Price of Medicine");
+		medicine.price = scn.nextDouble();
 		
-		medicalStore.add(azithromycin);
-		medicalStore.add(btrim);
-		medicalStore.add(chawanprash);
-		medicalStore.add(paracetmol);
-		medicalStore.add(vicks);
-		
-//		medicalStore.setMedicineList(medicalStore.getMedicineList());
+		medicalStore.add(medicine);
 		System.out.println(medicalStore.getMedicineList());
 				
 	}
-	
-	
+		
 	public static void main(String[] args) {
 		
-/*		
-		UserInterface userinterface = new UserInterface();
-		
-		userinterface.print(medicalstore.getMedicineList());
-		
-		medicalstore.remove(azithromycin);
-
-		System.out.println("After removing Azhithromycin");
-		userinterface.print(medicalstore.getMedicineList());
-*/
-		UserInterface userInterface = new UserInterface();
+		UserInterface userInterface = UserInterface.getInstance();
 		Main main = new Main();
-		
-//		int choice = userInterface.showMainMenu();
-//		main.handleUserSelection(choice);
-		
-		
 
 		int choice = 0;
 		while(choice != 5) {

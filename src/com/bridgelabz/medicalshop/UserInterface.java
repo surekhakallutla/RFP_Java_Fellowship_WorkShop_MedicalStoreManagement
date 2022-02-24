@@ -5,13 +5,20 @@ import java.util.*;
 public class UserInterface {
 	
 	Scanner scn = new Scanner(System.in);
-/*	
-	public int showTypeMenu() {
-		System.out.println("Select \n1.AYURVEDIC \n2.ALLOPATHIC \n3.HOMEOPATHIC");
-		int choice = scn.nextInt();
-		return choice;
+	
+	private UserInterface() {
+		
 	}
-*/	
+	
+	private static UserInterface instance;
+	
+	public static UserInterface getInstance() {
+		if(instance == null) {
+			instance = new UserInterface();
+		}
+		return instance;
+	}
+	
 	public void print(ArrayList<Medicine> medicineList) {
 		for(Object medicine : medicineList) {
 			System.out.println(medicine);

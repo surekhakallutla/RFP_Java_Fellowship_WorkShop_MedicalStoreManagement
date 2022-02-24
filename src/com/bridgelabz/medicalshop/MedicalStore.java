@@ -3,8 +3,21 @@ package com.bridgelabz.medicalshop;
 import java.util.*;
 
 public class MedicalStore {
-
+	
 	private ArrayList <Medicine> medicineList = new ArrayList <Medicine> ();
+	
+	private MedicalStore() {
+		
+	}
+	
+	private static MedicalStore instance;
+	
+	public static MedicalStore getInstance() {
+		if(instance == null) {
+			instance = new MedicalStore();
+		}
+		return instance;
+	}
 	
 	public ArrayList <Medicine> getMedicineList() 
 	{
